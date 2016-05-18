@@ -10,9 +10,8 @@ import de.gedoplan.knowhow.angular2cli.model.dto.QueryResult;
 import de.gedoplan.knowhow.angular2cli.model.dto.QuerySettings;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -51,7 +50,8 @@ public class CustomerResource {
         return customerService.calculateCustomerDiscount(customerId);
     }
 
-    @PUT
+    @POST
+    @JsonView(DetailView.class)
     public Customer updateCustomer(Customer customer) {
         return customerService.updateCustomer(customer);
     }
