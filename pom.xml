@@ -52,4 +52,31 @@
             <version>2.4.1</version>
         </dependency> 
     </dependencies>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>cz.habarta.typescript-generator</groupId>
+                <artifactId>typescript-generator-maven-plugin</artifactId>
+                <version>1.7.192</version>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <jsonLibrary>jackson2</jsonLibrary>
+                            <classPatterns>
+                                <pattern>de.gedoplan.knowhow.angular2cli.model.**</pattern>
+                            </classPatterns>
+                            <outputFile>target/rest.d.ts</outputFile>
+                            <outputKind>global</outputKind>
+                            <namespace>Rest</namespace>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
