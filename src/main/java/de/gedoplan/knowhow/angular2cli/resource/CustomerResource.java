@@ -1,11 +1,10 @@
 package de.gedoplan.knowhow.angular2cli.resource;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import de.gedoplan.knowhow.angular2cli.model.dto.views.DetailView;
-import de.gedoplan.knowhow.angular2cli.model.dto.views.ListView;
 import de.gedoplan.knowhow.angular2cli.service.CustomerService;
 import de.gedoplan.knowhow.angular2cli.model.Customer;
 import de.gedoplan.knowhow.angular2cli.model.dto.CustomerOrderInformation;
+import de.gedoplan.knowhow.angular2cli.model.dto.JSONViews;
 import de.gedoplan.knowhow.angular2cli.model.dto.QueryResult;
 import de.gedoplan.knowhow.angular2cli.model.dto.QuerySettings;
 import javax.inject.Inject;
@@ -26,7 +25,7 @@ public class CustomerResource {
     private CustomerService customerService;
 
     @GET
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     public QueryResult getCustomer(
             @QueryParam("max") Integer max,
             @QueryParam("start") Integer start,
@@ -39,7 +38,7 @@ public class CustomerResource {
 
     @GET
     @Path("detail/{id}")
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     public Customer getCustomerById(@PathParam("id") String customerID) {
         return customerService.getCustomerById(customerID);
     }
@@ -51,8 +50,7 @@ public class CustomerResource {
     }
 
     @POST
-    @JsonView(DetailView.class)
-    public Customer updateCustomer(Customer customer) {
+    public Customer updateCustomer(@JsonView(JSONViews.Details.class) Customer customer) {
         return customerService.updateCustomer(customer);
     }
 

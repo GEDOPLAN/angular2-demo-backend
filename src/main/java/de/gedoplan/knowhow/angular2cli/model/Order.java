@@ -1,8 +1,7 @@
 package de.gedoplan.knowhow.angular2cli.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import de.gedoplan.knowhow.angular2cli.model.dto.views.DetailView;
-import de.gedoplan.knowhow.angular2cli.model.dto.views.ListView;
+import de.gedoplan.knowhow.angular2cli.model.dto.JSONViews;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -27,59 +26,59 @@ public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     private Integer orderID;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     private Date orderDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private Date requiredDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private Date shippedDate;
 
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     private Double freight;
 
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     private String shipName;
 
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     private String shipAddress;
 
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     private String shipCity;
 
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private String shipRegion;
 
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     private String shipPostalCode;
 
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private String shipCountry;
 
     @JoinColumn(name = "CustomerID", referencedColumnName = "customerID")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private Customer customer;
 
     @JoinColumn(name = "EmployeeID", referencedColumnName = "employeeID")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private Employee employee;
 
     @JoinColumn(name = "ShipVia", referencedColumnName = "shipperID")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private Shipper shipVia;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private Collection<OrderDetail> orderDetails;
 
     public Order() {

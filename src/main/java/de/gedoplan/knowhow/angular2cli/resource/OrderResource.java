@@ -2,10 +2,9 @@ package de.gedoplan.knowhow.angular2cli.resource;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import de.gedoplan.knowhow.angular2cli.model.Order;
+import de.gedoplan.knowhow.angular2cli.model.dto.JSONViews;
 import de.gedoplan.knowhow.angular2cli.model.dto.QueryResult;
 import de.gedoplan.knowhow.angular2cli.model.dto.QuerySettings;
-import de.gedoplan.knowhow.angular2cli.model.dto.views.DetailView;
-import de.gedoplan.knowhow.angular2cli.model.dto.views.ListView;
 import de.gedoplan.knowhow.angular2cli.service.OrderService;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -24,7 +23,7 @@ public class OrderResource {
     private OrderService orderService;
 
     @GET
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     public QueryResult getOrders(
             @QueryParam("max") Integer max,
             @QueryParam("start") Integer start,
@@ -37,7 +36,7 @@ public class OrderResource {
 
     @GET
     @Path("details/{id}")
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     public Order getOrder(@PathParam("id") Integer orderId) {
         return orderService.getOrder(orderId);
     }

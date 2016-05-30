@@ -1,8 +1,7 @@
 package de.gedoplan.knowhow.angular2cli.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import de.gedoplan.knowhow.angular2cli.model.dto.views.DetailView;
-import de.gedoplan.knowhow.angular2cli.model.dto.views.ListView;
+import de.gedoplan.knowhow.angular2cli.model.dto.JSONViews;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.CascadeType;
@@ -20,45 +19,45 @@ public class Customer implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     private String customerID;
 
     @NotNull
     @Size(min = 3)
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     private String companyName;
 
     @NotNull
     @Size(min = 3)
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     private String contactName;
 
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private String contactTitle;
 
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     private String address;
 
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     private String city;
 
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private String region;
 
-    @JsonView(ListView.class)
+    @JsonView(JSONViews.Summary.class)
     private String postalCode;
 
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private String country;
 
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private String phone;
 
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private String fax;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-    @JsonView(DetailView.class)
+    @JsonView(JSONViews.Details.class)
     private Collection<Order> orders;
 
     public Customer() {
